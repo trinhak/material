@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ToastAndroid, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { ToastAndroid, View, TouchableOpacity, ScrollView, Platform, Modal } from 'react-native';
 import { BottomNavigation, Icon, ListItem, Avatar, Toolbar, ActionButton } from "react-native-material-ui";
 
 // import { Container } from './styles';
@@ -19,6 +19,7 @@ export default class Home extends Component {
         selected: [],
         searchText: '',
         active: 'people',
+        isDrawer: false
     };
 }
 
@@ -62,7 +63,7 @@ renderToolbar = () => {
           <Toolbar
               key="toolbar"
               leftElement="clear"
-              onLeftElementPress={() => this.setState({ selected: [] })}
+              onLeftElementPress={() => this.setState({ selected: [], isDrawer: true })}
               centerElement={this.state.selected.length.toString()}
               rightElement={['delete']}
               style={{
@@ -71,6 +72,7 @@ renderToolbar = () => {
                   leftElement: { color: 'rgba(0,0,0,.54)' },
                   rightElement: { color: 'rgba(0,0,0,.54)' },
               }}
+              onRightElementPress={() => this.setState({ isDrawer: true })}
           />
       );
   }
@@ -78,7 +80,7 @@ renderToolbar = () => {
       <Toolbar
           key="toolbar"
           leftElement="menu"
-          onLeftElementPress={() => this.props.navigation.goBack()}
+          onLeftElementPress={() => this.setState({ isDrawer: true })}
           centerElement="Home"
           searchable={{
               autoFocus: true,
@@ -86,11 +88,14 @@ renderToolbar = () => {
               onChangeText: value => this.setState({ searchText: value }),
               onSearchClosed: () => this.setState({ searchText: '' }),
           }}
+          onRightElementPress={() => this.setState({ isDrawer: true })}
       />
   );
 }
 
   render() {
+      const { isDrawer } = this.state;
+      console.log('**', isDrawer)
     return(
       <View style={{ flex: 1 }}>
           {this.renderToolbar()}
@@ -111,6 +116,11 @@ renderToolbar = () => {
               {this.renderItem('Toolbars', 'toolbar')}
               {this.renderItem('Bottom navigation', 'bottomNavigation')}
               {this.renderItem('Drawer', 'drawer')}
+              {this.renderItem('Toolbars1', 'toolbar1')}
+              {this.renderItem('Toolbars2', 'toolbar2')}
+              {this.renderItem('Toolbars3', 'toolbar3')}
+              {this.renderItem('Toolbars4', 'toolbar4')}
+              {this.renderItem('Toolbars5', 'toolbar5')}
           </ScrollView>
           <ActionButton
               actions={[
@@ -131,6 +141,7 @@ renderToolbar = () => {
                   positionContainer: { bottom: 76 },
               }}
           />
+          {isDrawer && this.props.navigation.navigate('drawer')}
       </View>
     );
   }
