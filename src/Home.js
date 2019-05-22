@@ -80,7 +80,7 @@ renderToolbar = () => {
       <Toolbar
           key="toolbar"
           leftElement="menu"
-          onLeftElementPress={() => this.setState({ isDrawer: true })}
+          onLeftElementPress={() => this.props.navigation.openDrawer()}
           centerElement="Home"
           searchable={{
               autoFocus: true,
@@ -88,7 +88,6 @@ renderToolbar = () => {
               onChangeText: value => this.setState({ searchText: value }),
               onSearchClosed: () => this.setState({ searchText: '' }),
           }}
-          onRightElementPress={() => this.setState({ isDrawer: true })}
       />
   );
 }

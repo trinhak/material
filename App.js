@@ -29,8 +29,13 @@ import Toolbars2 from "./src/Toolbars2";
 import Toolbars3 from "./src/Toolbars3";
 import Toolbars4 from "./src/Toolbars4";
 import Toolbars5 from "./src/Toolbars5";
+import mainDrawer from "./src/mainDrawer";
 
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import {
+  createStackNavigator,
+  createAppContainer,
+  createDrawerNavigator
+} from 'react-navigation';
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -67,8 +72,15 @@ const RootStack = createStackNavigator(
     headerMode: 'none',
   }
 );
+const drawerStack = createDrawerNavigator({
+  Home: {
+    screen: RootStack
+  }
+},{
+  contentComponent: mainDrawer
+})
 
-const AppContainer = createAppContainer(RootStack);
+const AppContainer = createAppContainer(drawerStack);
 
 type Props = {};
 export default class App extends Component<Props> {
