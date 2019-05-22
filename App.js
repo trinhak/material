@@ -24,6 +24,11 @@ import Avatar from "./src/Avatar";
 import Badge from "./src/Badge";
 import BottomNavigation from "./src/BottomNavigation";
 import Drawer from "./src/Drawer";
+import Toolbars1 from "./src/Toolbars1";
+import Toolbars2 from "./src/Toolbars2";
+import Toolbars3 from "./src/Toolbars3";
+import Toolbars4 from "./src/Toolbars4";
+import Toolbars5 from "./src/Toolbars5";
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 const instructions = Platform.select({
@@ -51,6 +56,11 @@ const RootStack = createStackNavigator(
     bottomNavigation: { screen: BottomNavigation },
     drawer: { screen: Drawer },
     badge: { screen: Badge },
+    toolbar1: { screen: Toolbars1 },
+    toolbar2: { screen: Toolbars2 },
+    toolbar3: { screen: Toolbars3 },
+    toolbar4: { screen: Toolbars4 },
+    toolbar5: { screen: Toolbars5 },
   },
   {
     initialRouteName: 'Home',
