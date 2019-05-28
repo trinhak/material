@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Dimensions, View} from 'react-native';
 
 import Home from "./src/Home";
 import Setting from "./src/Setting";
@@ -30,6 +30,7 @@ import Toolbars3 from "./src/Toolbars3";
 import Toolbars4 from "./src/Toolbars4";
 import Toolbars5 from "./src/Toolbars5";
 import mainDrawer from "./src/mainDrawer";
+import TabBar from "./src/TabBar";
 
 import {
   createStackNavigator,
@@ -45,6 +46,7 @@ const instructions = Platform.select({
 
 const RootStack = createStackNavigator(
   {
+    TabBar: { screen: TabBar },
     Home: Home,
     Details: Setting,
     actionButtonSpec: ActionButtonSpec,
@@ -68,14 +70,12 @@ const RootStack = createStackNavigator(
     toolbar5: { screen: Toolbars5 },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'TabBar',
     headerMode: 'none',
   }
 );
 const drawerStack = createDrawerNavigator({
-  Home: {
-    screen: RootStack
-  }
+  Home: { screen: RootStack},
 },{
   contentComponent: mainDrawer
 })

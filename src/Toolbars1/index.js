@@ -12,6 +12,17 @@ const styles = StyleSheet.create({
 
 
 class ToolbarSpec extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.offset = 0;
+        this.scrollDirection = 0;
+    
+        this.state = {
+            title: null
+        };
+    }
+
     render() {
         return (
             <Container>
@@ -22,12 +33,11 @@ class ToolbarSpec extends Component {
                 />
                 <View style={styles.container}>
                     <Toolbar
-                        centerElement="With menu"
+                        centerElement= {this.state.title || "With menu"}
                         rightElement={{
                             actions: ['edit'],
                             menu: { labels: ['Item 1', 'Item 2'] },
                         }}
-                        onRightElementPress={() => {}}
                     />
                 </View>
             </Container>

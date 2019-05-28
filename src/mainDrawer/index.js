@@ -14,10 +14,18 @@ export default class mainDrawer extends Component {
       isDrawerHome: false,
       isDrawerSetting: false
     };
-}
+  }
+
+  navigate = (route) => () => {
+    if (this.props.navigation.state.routes[0].routes[this.props.navigation.state.routes[0].routes.length -1].routeName === route) {
+      this.props.navigation.closeDrawer()
+    } else {
+      this.props.navigation.navigate(route)
+    }
+  }
 
   render() {
-
+    console.log(this.props.navigation.state.routes[0])
     return (
       <Container>
       <View style={{ flex: 1 }}>
@@ -52,7 +60,7 @@ export default class mainDrawer extends Component {
                       {
                         icon: 'home',
                         value: 'Home',
-                        onPress: () => this.props.navigation.navigate('Home'),
+                        onPress: this.navigate('Home'),
                         active: this.props.navigation.state.routes[0].index === 0
                       },
                   ]}
@@ -62,8 +70,14 @@ export default class mainDrawer extends Component {
                   items={[
                       { icon: 'settings',
                       value: 'Settings',
-                      onPress: () => this.props.navigation.navigate('Details'),
-                      active: this.props.navigation.state.routes[0].index === 1
+                      onPress: this.navigate('Details'),
+                      active: this.props.navigation.state.routes[0].routes[this.props.navigation.state.routes[0].routes.length -1].routeName === 'Details'
+                    },
+                    {
+                      icon: 'today',
+                      value: 'TabBar',
+                      onPress: this.navigate('TabBar'),
+                      active: this.props.navigation.state.routes[0].routes[this.props.navigation.state.routes[0].routes.length -1].routeName === 'TabBar'
                     },
                   ]}
               />

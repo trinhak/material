@@ -128,8 +128,6 @@ renderToolbar = () => {
                   { icon: 'sms', label: 'Text' },
                   { icon: 'favorite', label: 'Favorite' },
               ]}
-              hidden={this.state.bottomHidden}
-              icon="share"
               transition="speedDial"
               onPress={(action) => {
                   if (Platform.OS === 'android') {
@@ -140,7 +138,6 @@ renderToolbar = () => {
                   positionContainer: { bottom: 76 },
               }}
           />
-          {isDrawer && this.props.navigation.navigate('drawer')}
       </View>
     );
   }
