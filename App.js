@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Dimensions, View} from 'react-native';
+import {Platform, StyleSheet, Dimensions, ScrollView, Text, Image} from 'react-native';
 
 import Home from "./src/Home";
 import Setting from "./src/Setting";
@@ -31,11 +31,14 @@ import Toolbars4 from "./src/Toolbars4";
 import Toolbars5 from "./src/Toolbars5";
 import mainDrawer from "./src/mainDrawer";
 import TabBar from "./src/TabBar";
+import Danggable from './src/Danggable'
 
 import {
   createStackNavigator,
   createAppContainer,
-  createDrawerNavigator
+  createDrawerNavigator,
+  SafeAreaView,
+  DrawerItems
 } from 'react-navigation';
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -44,11 +47,21 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const CustomDrawerContentComponent = props => (
+  <ScrollView>
+    <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always', horizontal: 'never' }}>
+      <Text>hello</Text>
+      <DrawerItems {...props} />
+      <Text>footer</Text>
+    </SafeAreaView>
+  </ScrollView>
+);
+
 const RootStack = createStackNavigator(
   {
     TabBar: { screen: TabBar },
     Home: Home,
-    Details: Setting,
+    // Details: Setting,
     actionButtonSpec: ActionButtonSpec,
 
     avatar: { screen: Avatar },
@@ -74,17 +87,31 @@ const RootStack = createStackNavigator(
     headerMode: 'none',
   }
 );
+
 const drawerStack = createDrawerNavigator({
-  Home: { screen: RootStack},
+  Home: {
+    screen: RootStack,
+    navigationOptions: {
+      drawerLabel: ({ tintColor }) => {
+        return(<Text style={{ color: tintColor }}>hello</Text>)
+      },
+      drawerIcon: () => {
+        return (
+          <Image source={{uri: 'https://livinator.com/wp-content/uploads/2019/03/Home-Warranty.jpg'}} style={{ width: 50, height: 50 }}/>
+        )
+      }
+    }
+  },
+  Details: Setting,
+  Danggable: { screen: Danggable },
 },{
-  contentComponent: mainDrawer
+  contentComponent: CustomDrawerContentComponent
 })
 
 const AppContainer = createAppContainer(drawerStack);
 
 type Props = {};
 export default class App extends Component<Props> {
-
 
   render() {
     return <AppContainer />;

@@ -79,6 +79,12 @@ export default class mainDrawer extends Component {
                       onPress: this.navigate('TabBar'),
                       active: this.props.navigation.state.routes[0].routes[this.props.navigation.state.routes[0].routes.length -1].routeName === 'TabBar'
                     },
+                    {
+                      icon: 'people',
+                      value: 'Danggable',
+                      onPress: this.navigate('Danggable'),
+                      active: this.props.navigation.state.routes[0].routes[this.props.navigation.state.routes[0].routes.length -1].routeName === 'Danggable'
+                    },
                   ]}
               />
           </Drawer>

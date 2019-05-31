@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native'
 import ScrollableTabView , { ScrollableTabBar, DefaultTabBar } from 'react-native-scrollable-tab-view';
 
 import CustomBar from './CustomBar'
 
 export default class TabBar extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      scrollWith: 0
-    }
-    this.scroll = null
-  }
 
   componentDidMount() {
     // let a = 0
@@ -64,11 +56,12 @@ export default class TabBar extends Component {
       <Text>Seventh</Text>
     </View>
   )
-  eighth = () => (
+  eighth = () => {
+    return(
     <View tabLabel="Eighth" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Eighth</Text>
     </View>
-  )
+  )}
 
   onChangeTab = (obj) => {
     // if (this.scroll) {
@@ -78,8 +71,13 @@ export default class TabBar extends Component {
 
   renderTab = (name, page, isTabActive, goToPage) => {
     console.log(e)
+    const test = (
+      <View>
+        <Text>oke</Text>
+      </View>
+    )
    return (
-     <Text>oke</Text>
+     {test}
    )
 }
 
